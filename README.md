@@ -13,3 +13,12 @@ To run the backend on windows:
 cd backend
 .\run.ps1
 ```
+
+# Railway Deployment
+
+## Frontend
+
+```bash
+cd frontend; railway init
+railway up
+```
