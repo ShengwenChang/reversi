@@ -1,0 +1,33 @@
+.piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none; /* Allow clicks to fall through */
+  transition: transform 200ms ease-in-out, background 140ms linear;
+  /* second value is staggered via the --d custom property */
+  transition-delay: 0ms, var(--d, 0ms);
+  /* soft shadow below the piece for a lifted look */
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.6));
+}
+
+.piece.black {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #6a6a6a 0%,
+    #222 65%,
+    #000 100%
+  );
+}
+
+.piece.white {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #ffffff 0%,
+    #e0e0e0 65%,
+    #aaaaaa 100%
+  );
+}

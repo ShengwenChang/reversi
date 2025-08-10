@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat&display=swap");
+/* Styles for the landing page */
+
+.start-screen {
+  width: 100%;
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  font-family: "Nunito", sans-serif;
+}
+
+.title {
+  font-family: "Nunito", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.subtitle {
+  color: #c8a2c8;
+  font-family: "Caveat", cursive;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.color-selector {
+  width: clamp(240px, 80vw, 420px);
+  padding: 1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.color-selector:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.color-selector .piece {
+  position: static; /* override absolute positioning */
+  width: 48px;
+  height: 48px;
+  transform: none;
+  flex-shrink: 0;
+  pointer-events: none; /* keeps click target on button */
+}
