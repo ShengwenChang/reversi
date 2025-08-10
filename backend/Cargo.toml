@@ -1,0 +1,13 @@
+[package]
+name = "reversi_backend"
+edition = "2024"
+
+[lib]
+name = "rs_mod"
+crate-type = ["cdylib"]
+
+[dependencies]
+tokio = { version = "1.46.1", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+pyo3 = { version = "0.25", features = ["extension-module"] }
