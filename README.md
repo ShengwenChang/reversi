@@ -18,7 +18,7 @@ cd backend
 
 ## Linux Server Deployment
 
-Before proceeding, please ensure (docker)[https://docs.docker.com/engine/install/ubuntu/], (rust)[https://www.rust-lang.org/tools/install], (uv)[https://docs.astral.sh/uv/getting-started/installation/] and (npm)[https://docs.npmjs.com/downloading-and-installing-node-js-and-npm]are already installed.
+Before proceeding, please ensure [docker](https://docs.docker.com/engine/install/ubuntu/), [rust](https://www.rust-lang.org/tools/install), [uv](https://docs.astral.sh/uv/getting-started/installation/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) are already installed.
 
 **Step 1: Building the frontend.**
 
