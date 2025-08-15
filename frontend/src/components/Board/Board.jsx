@@ -17,7 +17,7 @@ const DIRS = [
 ];
 
 // delayS between pieces flipping in ms
-const FLIP_DELAY = 500;
+const FLIP_DELAY = 10;
 
 // basic helpers
 const is_in_bound = (r, c) => r >= 0 && r < SIZE && c >= 0 && c < SIZE;
