@@ -5,14 +5,8 @@ $ErrorActionPreference = 'Stop'
 
 Set-Location $PSScriptRoot
 
-Write-Host "Cleaning any leftover rs_mod artifacts"
-Remove-Item -Recurse -Force .venv
-
 Write-Host "Syncing environment (creates .venv if missing)"
 uv sync
-
-Write-Host "Running cargo clean"
-cargo clean
 
 Write-Host "Ensuring maturin is available"
 uv pip install maturin
