@@ -23,7 +23,6 @@ target_include_directories(${TARGET} PRIVATE "src/include")
 
 # Links dependencies
 target_link_libraries(${TARGET} PRIVATE SDL3::SDL3)
-target_link_libraries(${TARGET} PRIVATE imgui::imgui)
 
 # Adds C++ 17 standard
 target_compile_features(${TARGET} PRIVATE cxx_std_17)
