@@ -1,6 +1,8 @@
+.vscode
 .venv
 uv.lock
 Cargo.lock
 target/
 node_modules/
 __pycache__/
+build
