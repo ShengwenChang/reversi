@@ -97,6 +97,12 @@ vector<pair<int, int>> Board::get_valid_moves(Piece color) const {
   return valid_moves;
 }
 
+// updates cached valid moves for both colors
+void Board::update_next_moves() {
+  valid_moves_black = Board::get_valid_moves(Piece::BLACK);
+  valid_moves_white = Board::get_valid_moves(Piece::WHITE);
+}
+
 // public functions
 
 // constructor
@@ -111,6 +117,7 @@ Board::Board(Piece _player_color) {
   board[BOARD_SIZE / 2][BOARD_SIZE / 2] = Piece::WHITE;
   board[BOARD_SIZE / 2 - 1][BOARD_SIZE / 2] = Piece::BLACK;
   board[BOARD_SIZE / 2][BOARD_SIZE / 2 - 1] = Piece::BLACK;
+  update_next_moves();
 }
 
 // casts ths board into a char array
@@ -134,6 +141,28 @@ void Board::to_char(char char_board[8][26]) const {
       char_board[i][j] = 'U';
     }
   }
+}
+
+// returns true if game ends
+bool Board::game_end() const {
+  bool full_board = true;
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
+      if (board[i][j] == Piece::EMPTY) {
+        full_board = false;
+        break;
+      }
+    }
+  }
+  return full_board && valid_moves_black.empty() && valid_moves_white.empty();
+}
+
+// returns true if a color has valid moves
+bool Board::has_moves(Piece color) const {
+  if (color == Piece::EMPTY)
+    return false;
+  return color == Piece::BLACK ? !valid_moves_black.empty()
+                               : !valid_moves_white.empty();
 }
 
 // gets the winner of the game
@@ -204,7 +233,8 @@ void Board::draw_board(SDL_Renderer* renderer, Piece color) const {
 
   // draws next available spots for player
   if (color == player_color) {
-    vector<pair<int, int>> next_moves = Board::get_valid_moves(player_color);
+    const vector<pair<int, int>>& next_moves =
+        (player_color == Piece::BLACK) ? valid_moves_black : valid_moves_white;
     for (const auto& [i, j] : next_moves) {
       Board::draw_filled_circle(renderer, i * CELL_SIZE + CELL_SIZE / 2,
                                 j * CELL_SIZE + CELL_SIZE / 2,
@@ -229,27 +259,6 @@ bool Board::make_move(int row, int col, Piece color) {
   for (const auto& [flip_row, flip_col] : flips) {
     Board::flip(flip_row, flip_col);
   }
+  update_next_moves();
   return true;
 }
-
-// returns true if game ends
-bool Board::game_end() const {
-  bool full_board = true;
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      if (board[i][j] == Piece::EMPTY) {
-        full_board = false;
-        break;
-      }
-    }
-  }
-  return full_board && (!has_moves(Piece::BLACK) || !has_moves(Piece::WHITE));
-}
-
-// returns true if a color has valid moves
-bool Board::has_moves(Piece color) const {
-  if (color == Piece::EMPTY)
-    return false;
-  return !Board::get_valid_moves(color).empty();
-}
-
