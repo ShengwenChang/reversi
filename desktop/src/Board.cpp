@@ -113,6 +113,53 @@ Board::Board(Piece _player_color) {
   board[BOARD_SIZE / 2][BOARD_SIZE / 2 - 1] = Piece::BLACK;
 }
 
+// casts ths board into a char array
+void Board::to_char(char char_board[8][26]) const {
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      switch (board[i][j]) {
+        case Piece::WHITE:
+          char_board[i][j] = 'W';
+          break;
+        case Piece::BLACK:
+          char_board[i][j] = 'B';
+          break;
+        default:
+          char_board[i][j] = 'U';
+          break;
+      }
+    }
+    // Fill the rest of the row with empty
+    for (int j = 8; j < 26; j++) {
+      char_board[i][j] = 'U';
+    }
+  }
+}
+
+// gets the winner of the game
+string Board::get_winner() const {
+  int black_count = 0;
+  int white_count = 0;
+
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
+      if (board[i][j] == Piece::BLACK) {
+        black_count++;
+      } else if (board[i][j] == Piece::WHITE) {
+        white_count++;
+      }
+    }
+  }
+
+  if (black_count > white_count) {
+    return "Black";
+  } else if (white_count > black_count) {
+    return "White";
+  } else {
+    return "Tie";
+  }
+}
+
 // draws the entire board onto the screen
 void Board::draw_board(SDL_Renderer* renderer, Piece color) const {
   // draws a white background
@@ -206,49 +253,3 @@ bool Board::has_moves(Piece color) const {
   return !Board::get_valid_moves(color).empty();
 }
 
-// casts ths board into a char array
-void Board::to_char(char char_board[8][26]) const {
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      switch (board[i][j]) {
-        case Piece::WHITE:
-          char_board[i][j] = 'W';
-          break;
-        case Piece::BLACK:
-          char_board[i][j] = 'B';
-          break;
-        default:
-          char_board[i][j] = 'U';
-          break;
-      }
-    }
-    // Fill the rest of the row with empty
-    for (int j = 8; j < 26; j++) {
-      char_board[i][j] = 'U';
-    }
-  }
-}
-
-// gets the winner of the game
-string Board::get_winner() const {
-  int black_count = 0;
-  int white_count = 0;
-
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      if (board[i][j] == Piece::BLACK) {
-        black_count++;
-      } else if (board[i][j] == Piece::WHITE) {
-        white_count++;
-      }
-    }
-  }
-
-  if (black_count > white_count) {
-    return "Black";
-  } else if (white_count > black_count) {
-    return "White";
-  } else {
-    return "Tie";
-  }
-}
